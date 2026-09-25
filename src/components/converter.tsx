@@ -1,0 +1,13 @@
+"use client";
+import {useId,useState} from "react";
+import {parseAmount,flareToRub,rubToFlare,inputAmount} from "@/lib/money";
+import {Icon} from "./icon";
+export function Converter(){
+  const id=useId();const [rub,setRub]=useState("1 500");const [flare,setFlare]=useState("1 000");const [error,setError]=useState(false);
+  function change(value:string,type:"rub"|"flare"){
+    const update=type==="rub"?setRub:setFlare; const other=type==="rub"?setFlare:setRub;
+    update(value);if(!value){other("");setError(false);return;}const amount=parseAmount(value);
+    setError(amount===null);other(amount===null?"":inputAmount(type==="rub"?rubToFlare(amount):flareToRub(amount)));
+  }
+  return <section className="converter" aria-labelledby={id}><div className="converter-heading"><span className="eyebrow">ПРОСТОЙ КУРС</span><h2 id={id}>Твои рубли — твои FLARE</h2></div><div className="converter-fields"><label><span className="sr-only">Рубли</span><input aria-label="Рубли" value={rub} inputMode="decimal" maxLength={12} onChange={e=>change(e.target.value,"rub")} aria-invalid={error}/><span>₽</span></label><span className="convert-icon"><Icon name="swap"/></span><label><span className="sr-only">FLARE</span><input aria-label="FLARE" value={flare} inputMode="decimal" maxLength={12} onChange={e=>change(e.target.value,"flare")} aria-invalid={error}/><span>FLARE</span></label></div><div className="converter-rate"><strong>1 FLARE = 1,5 ₽</strong><span>{error?"Введите корректную сумму":"Меняй сумму в любом поле"}</span></div>{error&&<p className="converter-error" role="status">Введите корректную сумму: до двух знаков после запятой.</p>}</section>;
+}
