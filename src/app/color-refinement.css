@@ -1,0 +1,26 @@
+/* Vivid orange identity; layered fire gradients on display surfaces, graphite beneath forms. */
+:root{--accent:#ff5b26;--accent-text:#ff956f;--accent-ink:#181818;--pink:var(--accent);--pink-hover:#ff8145;--warm-line:#695048}
+.hero-skin{background:radial-gradient(ellipse at 30% 12%,#ff9b32 0%,transparent 58%),linear-gradient(125deg,#ff7527 12%,#ff4b20 60%,#d93021 100%)}
+.hero-orbit{border-color:#571b1642}.hero-orbit:after{border-color:#571b1630}
+.hero-inspect,.hero-skin:hover .hero-inspect{background:#211b19;color:#fff1e6}
+.hero-skin .hero-object img{filter:drop-shadow(0 22px 18px #52170766)}
+.topup-panel.steam-panel{color-scheme:dark;--ink:#f5eee5;--paper:#251f1b;--text:#f5eee5;--muted:#d0c1b4;--line:#695048;background:radial-gradient(ellipse at 100% 0%,#642d21 0%,transparent 64%),linear-gradient(145deg,#302420,#202020);color:var(--text);border-top:2px solid #ff5b26}
+.steam-panel .topup-title{color:var(--accent-text)}
+.steam-panel .field-label,.steam-panel .field-label>span,.steam-panel .money-input>span{color:#d8c8b9}
+.steam-panel .money-input,.steam-panel .text-input{background:#231f1c;border-color:#8b7260;color:#f5eee5}
+.steam-panel .money-input input{color:#f5eee5}.steam-panel input::placeholder{color:#bdada0}
+.steam-panel .amount-presets>button{background:#29231f;border-color:#8b7260;color:#e1d4c7}
+.steam-panel .amount-presets>button.selected{background:#ff5b26;color:#181818;border-color:#ff5b26}
+.steam-panel .steam-summary{color:#d0c1b4}.steam-panel .steam-summary .pink{color:#ff956f}
+.steam-panel .topup-total{border-color:#695048;color:#f5eee5}
+.steam-panel .button.primary,.loadout-summary .button,.account-page .account-balance .button{background:linear-gradient(110deg,#ff8135,#ff5527);color:#181818;border-color:transparent}
+.steam-panel .button.primary:hover,.loadout-summary .button:hover,.account-page .account-balance .button:hover{background:#ff8a45;color:#181818}
+.gift-card-face{background:radial-gradient(ellipse at 15% 0%,#ffac3b,transparent 66%),linear-gradient(125deg,#ff862c,#ff6528 64%,#ff542c);color:#181818;border-color:#ff8a47;box-shadow:14px 16px 0 #141414}
+.gift-card-face>small{color:#251a16}
+.flare-footer{color-scheme:dark;background:radial-gradient(ellipse at 0% 100%,#602d21 0%,transparent 62%),linear-gradient(120deg,#29231f,#1c1c1c);color:#eee5da;border-top:1px solid #5a493d}
+.footer-directory>.wordmark{color:#ff652b}.footer-directory>p{color:#c8b9a9}.footer-directory nav>a,.footer-directory nav>a:last-child,.footer-baseline{border-color:#6b594b}.footer-baseline{color:#c8b9a9}
+.site-header .main-nav a.active,.site-header .main-nav a:hover,.hero-switch button[aria-pressed=true],.category-line.is-active>button,.loadout-count,.gift-steps b{color:var(--accent-text)}
+.hero-switch button[aria-pressed=true]{border-color:var(--accent)}
+.loadout-controls button:hover,.catalog-page .add-button.added{background:var(--accent);color:var(--accent-ink)}
+.gift-form .gift-activation-note{border-color:#ff652b}.catalog-page .filter-option input,.gift-confirm input{accent-color:var(--accent)}
+.color-orange .color-swatch{background:#ff652b}

@@ -1,0 +1,41 @@
+/* Keep the product and its controls together within the first viewport. */
+.flare-hero{padding-top:16px}
+.hero-overline{margin-bottom:12px;font-size:11px}
+.hero-title{padding:0 0 16px;border-left:0}
+.hero-title h1{font-size:clamp(56px,min(6vw,10svh),104px);line-height:1.02}
+.hero-side-copy{padding-bottom:24px}
+.hero-side-copy p{font-size:16px;margin-top:18px}
+.hero-side-copy .round-cta{margin-top:20px}
+.hero-visual{grid-column:2;position:relative;min-width:0;isolation:isolate}
+.hero-visual .hero-skin{display:block;height:clamp(180px,28svh,300px);width:100%;padding-bottom:30px}
+.hero-product{padding:12px 0;gap:18px}
+.hero-product strong{font-size:20px}
+.hero-footer{min-height:64px;margin-top:0;gap:28px}
+.hero-switch{position:absolute;bottom:12px;right:16px;z-index:4;display:flex;flex-direction:row;align-items:center;gap:4px;margin:0;padding:4px 8px;background:#1b1b1be8;color:#f2f1e9;border:1px solid #ffffff24;grid-column:auto;grid-row:auto}
+.hero-switch-label{font-size:11px;margin-right:10px;color:#bdb8b5}
+.hero-switch button{width:36px;height:32px;min-height:32px;font-size:12px;color:#f2f1e9;border-color:transparent}
+.hero-switch button[aria-pressed=true]{color:#ff956f;border-color:#ff5b26}
+@media(max-width:1000px) and (min-width:601px){
+ .hero-title h1{font-size:clamp(48px,min(6.5vw,10svh),72px)}
+ .hero-side-copy p{font-size:14px}
+ .hero-product{gap:12px}
+}
+@media(max-width:600px){
+ .flare-hero{padding-top:14px}
+ .hero-overline{margin-bottom:16px;font-size:9px}
+ .hero-title{padding:0 0 16px}
+ .hero-title h1{font-size:clamp(44px,13.5vw,72px);line-height:1.03}
+ .hero-side-copy{padding-bottom:16px;gap:12px}
+ .hero-side-copy p{font-size:13px;line-height:1.45;margin:0}
+ .hero-side-copy .round-cta{margin:0;width:40px;height:40px}
+ .hero-visual{grid-column:1}
+ .hero-visual .hero-skin{height:clamp(160px,24svh,220px);padding-bottom:25px}
+ .hero-switch{right:10px;bottom:8px;padding:2px 6px}
+ .hero-switch button{height:30px;min-height:30px;width:32px}
+ .hero-product{padding:10px 0}
+ .hero-product strong{font-size:17px}
+ .hero-footer{padding:12px 0 16px;gap:12px;min-height:0;grid-template-columns:1fr auto}
+ .hero-footer .hero-main-link{grid-column:1}
+ .hero-footer .hero-steam-link{grid-column:1;grid-row:2}
+ .hero-motion-toggle{grid-column:2;grid-row:1/3;max-width:82px;text-align:right;margin:0;align-self:center}
+}

@@ -30,4 +30,14 @@ Node.js 24, `npm ci`, `npm run dev`. Локальный адрес http://127.0.
 
 project-prompts.md — семь адаптированных промтов. PROJECT.md — требования. DESIGN_DIRECTION.md и reference-evidence/review.md — применение референсов. REQUIREMENTS_AUDIT.md — проверки и ограничения.
 
-Manrope: SIL OFL, public/fonts/Manrope-OFL.txt. Изображения скинов из локального снимка Frags с сохранёнными URL происхождения; не генерировались и не перекрашивались.
+Oswald + GolosText: SIL OFL, лицензии public/fonts/Oswald-OFL.txt и public/fonts/GolosText-OFL.txt. Изображения скинов из локального снимка Frags с сохранёнными URL происхождения; не генерировались и не перекрашивались.
+
+## GitHub Pages
+
+Public URL: https://vv-organization.github.io/flare-skins/
+
+Pushes to `codex/flare-storefront` run `.github/workflows/pages.yml`: Node 24, lockfile installation, lint, tests, isolated static export and Pages deployment. Use Actions → Deploy FLARE to GitHub Pages → Run workflow for a manual redeploy.
+
+Local equivalent: `npm ci && npm run lint && npm test && npm run build:pages`.
+The export goes to ignored `out-pages/`; its base path is `/flare-skins`.
+The source API routes stay in the repository but are excluded from the isolated Pages export. GitHub Pages does not execute the checkout/top-up/Steam server routes; production financial integrations require a separate backend. No provider secrets belong in the static client.

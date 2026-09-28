@@ -1,0 +1,23 @@
+/* One surface language for product imagery and utility cards throughout FLARE. */
+:root{
+ --card-surface:radial-gradient(ellipse at 95% 0%,#693021 0%,#422820 38%,transparent 76%),linear-gradient(145deg,#292422,#1d1d1d);
+ --card-line:#755044;
+}
+.product-image-button,
+.catalog-page .product-image-button,
+.editorial-item .product-image-button,
+.loadout-image,
+.compare-image,
+.cart-page .cart-image,
+.cart-image,
+.quick-detail .detail-visual,
+.detail-visual,
+.inspection-plum{background:var(--card-surface);box-shadow:inset 0 1px #b65a354d}
+.account-page .account-balance,
+.account-page .account-panel,
+.account-panel,
+.order-summary{background:var(--card-surface);border-color:var(--card-line)}
+.modal,.modal:not(.modal-wide){background:radial-gradient(ellipse at 100% 0%,#422820,transparent 55%),#201e1d;border-color:#645047}
+.inspection-surfaces>.surface-plum{background:var(--card-surface)}
+.inspection-dark{background:#141414}
+/* Keep the explicitly selected light inspection backdrop and orange gift artwork. */

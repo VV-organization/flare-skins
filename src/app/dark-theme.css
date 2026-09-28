@@ -1,0 +1,81 @@
+/* Marketplace theme. Layout and product-led copy remain independent of Frags. */
+:root{color-scheme:dark;--bg:#1b1b1b;--surface:#242322;--raised:#302b28;--text:#f2f1e9;--muted:#bdb6b0;--line:#4d4844;--theme-muted:#bdb6b0;--theme-line:#4d4844;--theme-image:#292625}
+.site-header,.flare-hero,.home-topups,.skin-guide,.category-index,.gift-section,.catalog-page,.cart-page,.account-page,.account-guest{
+ --paper:#1b1b1b;--ink:#f2f1e9;--bg:#1b1b1b;--surface:#242322;--raised:#302b28;--text:#f2f1e9;--muted:#bdb6b0;--line:#4d4844;
+ background:var(--bg);color:var(--text)
+}
+.site-header{border-color:var(--line)}
+.site-header .main-nav a,.site-header .cart-link,.site-header .button.secondary{color:var(--text)}
+.site-header .main-nav a.active,.site-header .main-nav a:hover{color:#ff997b}
+.site-header .button.secondary{border-color:var(--line)}
+.header-login{background:#f2f1e9;color:#1b1b1b}
+.hero-overline,.hero-side-copy .eyebrow,.hero-product>.eyebrow,.hero-product .price small,.hero-product .price b{color:var(--muted)}
+.hero-title,.hero-footer,.round-cta{border-color:var(--line)}
+.hero-title em{color:var(--text)}
+.hero-main-link{background:#f2f1e9;color:#1b1b1b}
+.hero-inspect,.hero-skin:hover .hero-inspect{background:#1b1b1b;color:#f2f1e9}
+.hero-switch button{color:var(--muted);border-color:var(--line)}
+.hero-switch button[aria-pressed=true]{color:#ff997b;border-color:#ff997b}
+.hero-skin{background:#ff4421}
+.home-topups .topup-heading-note{color:var(--muted)}
+.topup-panel{--ink:#f2f1e9;--paper:#1b1b1b;--text:#f2f1e9;--muted:#bdb6b0;--line:#4d4844;border-color:var(--line)}
+.topup-panel+article{background:transparent}
+.topup-panel .money-input,.topup-panel .text-input,.topup-panel .amount-presets>button,.topup-panel .payment-choice label{border-color:#6d6d6d}
+.topup-panel input::placeholder{color:#aeaeae}
+.topup-panel .payment-choice label.selected{background:#ffffff09;border-color:#d4d4d4}
+.topup-panel .button.primary:hover{background:#dbdbdb;color:#1b1b1b}
+/* Orange remains a separate high-contrast surface, including native controls. */
+.topup-panel.steam-panel{color-scheme:light;--ink:#181818;--paper:#f2f1e9;--text:#181818;--muted:#2b2b2b;--line:#18181855;background:#ff4421;color:#181818;border-color:#ff4421}
+.steam-panel .field-label>span,.steam-panel .money-input>span{color:#2b2b2b}
+.steam-panel .money-input,.steam-panel .text-input,.steam-panel .amount-presets>button{border-color:#18181880}
+.steam-panel input::placeholder{color:#363636}
+.topup-panel .form-message{color:var(--text)}
+.editorial-item .product-image-button,.catalog-page .product-image-button,.cart-page .cart-image{background:var(--theme-image)}
+.skin-guide{background:#242322}
+.skin-guide dl>div,.category-index,.category-line,.category-all{border-color:var(--theme-line)}
+.skin-guide dd{color:var(--muted)}
+.category-line.is-active>button{color:#ff997b}
+.category-expansion a{border-color:var(--theme-line)}
+.category-expansion p{color:var(--muted)}
+.category-index{background:#242322}
+.gift-section{background:#242322}
+.gift-art{border-color:var(--theme-line)}
+.gift-art>p,.gift-form>.eyebrow,.gift-form>p,.gift-summary>span:last-child{color:var(--muted)}
+.gift-card-face{background:#ff4421;color:#181818;box-shadow:14px 16px 0 #0f0f0f}
+.gift-form>select,.gift-denominations button{color:var(--text);border-color:#6d6d6d;background:transparent}
+.gift-form option{background:#242322;color:var(--text)}
+.gift-denominations button.active{background:#f2f1e9;color:#1b1b1b;border-color:#f2f1e9}
+.gift-confirm input{accent-color:#ff997b}
+.gift-summary{border-color:var(--theme-line)}
+.gift-form>.button{background:#f2f1e9;color:#1b1b1b}
+.gift-form>.button:hover{background:#dbdbdb}
+.bottom-converter{background:#242322}
+.flare-footer{color-scheme:light;background:#ff4421;color:#181818}
+.catalog-page .market-intro-copy>.eyebrow,.catalog-page .market-intro-copy>p,.catalog-page .filter-heading .eyebrow{color:var(--muted)}
+.catalog-page .catalog-category-tabs>button{border-color:#5f5f5f;color:var(--text)}
+.catalog-page .catalog-category-tabs>button.active{background:#f2f1e9;color:#1b1b1b;border-color:#f2f1e9}
+.catalog-page .catalog-category-tabs>button.active>span{color:#3a3a3a}
+.catalog-page .catalog-category-tabs>button>span{color:var(--muted)}
+.catalog-page .catalog-toolbar input,.catalog-page .sort-control select,.catalog-page .price-range input{color:var(--text)}
+.catalog-page .sort-control option{background:#242322;color:var(--text)}
+.catalog-page .search-input,.catalog-page .sort-control,.catalog-page .price-range input{border-color:#5f5f5f}
+.catalog-page .filter-option input{accent-color:#ff997b}
+.catalog-page .add-button{background:#f2f1e9;color:#1b1b1b}
+.catalog-page .add-button.added{background:#ff4421;color:#181818}
+.catalog-page .product-image-button .quick-label{background:#1b1b1b;color:#f2f1e9}
+.cart-page .page-heading .eyebrow,.account-page .page-heading .eyebrow,.account-guest>.eyebrow{color:var(--muted)}
+.cart-page .order-summary .checkout-method label{color:var(--text);border-color:var(--line)}
+.cart-page .order-summary .checkout-method label.selected{background:#ffffff09;border-color:#cecece}
+.cart-page .order-summary .button{background:#f2f1e9;color:#1b1b1b}
+.account-page .account-sidebar nav button,.account-page .account-sidebar nav a{color:var(--text)}
+.account-page .account-sidebar nav button.active{background:#f2f1e9;color:#1b1b1b}
+.account-page .account-sidebar nav button.active svg{color:#1b1b1b}
+.account-page .profile-avatar{background:#f2f1e9;color:#1b1b1b}
+.account-page .account-balance{background:#302b28;color:var(--text)}
+.account-page .account-balance .button{background:#ff4421;color:#181818}
+.account-page .account-balance .eyebrow,.account-page .account-balance p,.account-page .account-balance .price small,.account-page .account-balance .price b{color:#cbcbcb}
+.account-page .trade-input-row input,.account-page .money-input input,.account-page .text-input{color:var(--text)}
+.account-page .account-panel{border-color:var(--line)}
+.account-topup .payment-choice label.selected{background:#ffffff09;border-color:#cecece}
+.inspection{background:#292625}.inspection-light{color-scheme:light;background:#efefe8;color:#181818}.inspection-dark{background:#0f0f0f}
+@media(max-width:800px){.site-header .main-nav.is-open{background:#242322;color:#f2f1e9;border-color:#4d4844}.gift-art{border-color:#4d4844}}

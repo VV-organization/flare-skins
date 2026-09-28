@@ -5,7 +5,7 @@ import {spawnSync} from "node:child_process";
 
 const project=process.cwd();
 const stage=await mkdtemp(path.join(tmpdir(),"flare-skins-pages-"));
-const basePath=process.env.FLARE_PAGES_BASE_PATH??"/flare-skins-site";
+const basePath=process.env.FLARE_PAGES_BASE_PATH??"/flare-skins";
 if(basePath && !/^\/[a-zA-Z0-9_-]+$/.test(basePath))throw new Error("Invalid Pages base path");
 try {
   for(const entry of ["src","public","next.config.ts","next-env.d.ts","tsconfig.json","package.json"]){

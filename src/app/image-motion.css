@@ -1,0 +1,16 @@
+/* Noho's radial reveal owns the image, not its text, controls or coloured surface. */
+.image-wave-canvas{position:absolute;pointer-events:none;z-index:1;max-width:none}
+.image-wave-pending{opacity:0!important}
+.image-wave-active{position:relative}
+.image-wave-active>img{transition:none!important;transform:none!important}
+.image-wave-active>.quick-label,.loadout-image>span,.compare-image>span{z-index:2}
+.loadout-image img,.compare-image img,.inspection-object>img{animation:none}
+.hero-object{animation:hero-drift 7s ease-in-out infinite}
+.hero-skin .hero-object img,.hero-skin:hover .hero-object img{animation:none;transform:none;transition:none}
+.hero-skin:hover .hero-object{animation-play-state:paused}
+.product-card:hover .image-wave-active>img{transform:none}
+@media(prefers-reduced-motion:reduce){
+ .hero-object{animation:none}
+ .image-wave-pending{opacity:1!important}
+ .image-wave-canvas{display:none}
+}
