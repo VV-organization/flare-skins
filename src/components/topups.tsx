@@ -1,15 +1,15 @@
 "use client";
 import {useId,useRef,useState} from "react";
-import {parseAmount,flareToRub,steamQuote,formatMinor} from "@/lib/money";
+import {parseAmount,dropsToRub,steamQuote,formatMinor} from "@/lib/money";
 import {Icon} from "./icon";
 type Profile={steamId:string;name:string;profileUrl:string};
 export function BalanceForm(){
   const id=useId();const [amount,setAmount]=useState("1 000");const [method,setMethod]=useState("card");const [message,setMessage]=useState("");const minor=parseAmount(amount);
   return <form onSubmit={async e=>{e.preventDefault();if(!minor){setMessage("Введите сумму больше нуля, до двух знаков после запятой.");return;}setMessage("Платёжный сервис временно недоступен. Баланс не изменён.");}}>
-    <div className="topup-form-body"><label className="field-label" htmlFor={id}>Сколько FLARE зачислить</label><div className="money-input"><input id={id} value={amount} inputMode="decimal" maxLength={12} onChange={e=>{setAmount(e.target.value);setMessage("");}} required/><span>FLARE</span></div>
+    <div className="topup-form-body"><label className="field-label" htmlFor={id}>Сколько Drops зачислить</label><div className="money-input"><input id={id} value={amount} inputMode="decimal" maxLength={12} onChange={e=>{setAmount(e.target.value);setMessage("");}} required/><span>Drops</span></div>
     <div className="amount-presets">{[500,1000,2500,5000].map(n=><button type="button" key={n} className={minor===n*100?"selected":""} onClick={()=>{setAmount(String(n));setMessage("");}}>{n.toLocaleString("ru-RU")}</button>)}</div>
     <fieldset className="payment-choice"><legend>Способ оплаты</legend><label className={method==="card"?"selected":""}><input type="radio" name={id+"method"} checked={method==="card"} onChange={()=>setMethod("card")}/>Банковская карта</label><label className={method==="sbp"?"selected":""}><input type="radio" name={id+"method"} checked={method==="sbp"} onChange={()=>setMethod("sbp")}/>СБП</label></fieldset>
-    </div><div className="topup-total"><span>К оплате</span><strong>{minor===null?"—":formatMinor(flareToRub(minor))} ₽</strong></div>
+    </div><div className="topup-total"><span>К оплате</span><strong>{minor===null?"—":formatMinor(dropsToRub(minor))} ₽</strong></div>
     <div className="topup-form-action"><button className="button primary full" type="submit">Пополнить баланс <Icon name="arrow"/></button>{message&&<p className="form-message" role="status">{message}</p>}</div>
   </form>;
 }
@@ -41,5 +41,5 @@ export function SteamForm(){
   </form>;
 }
 export function Topups(){
-  return <section className="section topup-section" id="topups" aria-labelledby="topup-heading"><div className="section-heading"><h2 id="topup-heading">Два способа пополнения</h2></div><div className="topup-grid"><article className="topup-panel steam-panel" id="steam"><div className="topup-title"><h3>Пополнение Steam</h3><Icon name="steam" size={32}/></div><p className="muted">Зачисление на аккаунт Steam.<br/>Комиссия 5% включена в итог.</p><SteamForm/></article><article className="topup-panel" id="balance"><div className="topup-title"><h3>Баланс FLARE</h3><Icon name="wallet" size={32}/></div><p className="muted">Для оплаты предметов в каталоге.<br/>1 FLARE = 1,5 ₽.</p><BalanceForm/></article></div></section>;
+  return <section className="section topup-section" id="topups" aria-labelledby="topup-heading"><div className="section-heading"><h2 id="topup-heading">Два способа пополнения</h2></div><div className="topup-grid"><article className="topup-panel steam-panel" id="steam"><div className="topup-title"><h3>Пополнение Steam</h3><Icon name="steam" size={32}/></div><p className="muted">Зачисление на аккаунт Steam.<br/>Комиссия 5% включена в итог.</p><SteamForm/></article><article className="topup-panel" id="balance"><div className="topup-title"><h3>Баланс Drops</h3><Icon name="wallet" size={32}/></div><p className="muted">Для оплаты предметов в каталоге.<br/>1 ₽ = 1,8 Drops.</p><BalanceForm/></article></div></section>;
 }

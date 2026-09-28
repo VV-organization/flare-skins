@@ -1,5 +1,7 @@
 /** Minor units are hundredths; preview rounding is half-up, not a live payment contract. */
-export const RUBLES_PER_FRAG = 1.5;
+export const DROPS_PER_RUBLE = 1.8;
+const RATE_NUMERATOR = 9n;
+const RATE_DENOMINATOR = 5n;
 export const STEAM_FEE_PERCENT = 5;
 const MAX_MINOR = 999_999_999;
 
@@ -13,13 +15,13 @@ export function parseAmount(value: string): number | null {
 function validMinor(value: number) {
   if (!Number.isSafeInteger(value) || value < 0 || value > MAX_MINOR) throw new RangeError("Invalid money amount");
 }
-export function flareToRub(flareMinor: number) {
-  validMinor(flareMinor);
-  return Number((BigInt(flareMinor) * 3n + 1n) / 2n);
+export function dropsToRub(dropsMinor: number) {
+  validMinor(dropsMinor);
+  return Number((BigInt(dropsMinor) * RATE_DENOMINATOR + RATE_NUMERATOR / 2n) / RATE_NUMERATOR);
 }
-export function rubToFlare(rubMinor: number) {
+export function rubToDrops(rubMinor: number) {
   validMinor(rubMinor);
-  return Number((BigInt(rubMinor) * 2n + 1n) / 3n);
+  return Number((BigInt(rubMinor) * RATE_NUMERATOR + RATE_DENOMINATOR / 2n) / RATE_DENOMINATOR);
 }
 export function steamQuote(amount: number) {
   validMinor(amount);
@@ -27,9 +29,9 @@ export function steamQuote(amount: number) {
   return { amount, fee, total: amount + fee };
 }
 export function sumPrices(prices: readonly number[]) {
-  const flare=prices.reduce((sum,price)=>{validMinor(price);return sum+price;},0);
-  if(!Number.isSafeInteger(flare))throw new RangeError("Invalid total");
-  return {flare,rub:Number((BigInt(flare)*3n+1n)/2n)};
+  const drops=prices.reduce((sum,price)=>{validMinor(price);return sum+price;},0);
+  if(!Number.isSafeInteger(drops))throw new RangeError("Invalid total");
+  return {drops,rub:Number((BigInt(drops)*RATE_DENOMINATOR+RATE_NUMERATOR/2n)/RATE_NUMERATOR)};
 }
 export function formatMinor(minor: number, digits = 2) {
   return (minor / 100).toLocaleString("ru-RU", { minimumFractionDigits:0, maximumFractionDigits:digits });

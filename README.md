@@ -1,4 +1,4 @@
-# FLARE
+# Drops
 
 Магазин скинов, пополнение Steam и карты Apple. Новый визуал по Trionn, bleibtgleich, Boc и Hobro; структура и сценарии адаптированы из Frags.
 
@@ -24,7 +24,7 @@ Node.js 24, `npm ci`, `npm run dev`. Локальный адрес http://127.0.
 
 Платежи, Steam OpenID, вендор/выдача скинов и поставщик Apple не подключены. Операции ничего не списывают и сообщают о недоступности. Серверная проверка Steam читает официальный публичный XML профиля, проверяет соответствие Steam ID; это не проверка возможности пополнения. GitHub Pages не запускает серверные API.
 
-Регионы/номиналы Apple — предварительные варианты интерфейса, без выдуманной рублёвой цены или кода. FLARE — рабочее название. Курс унаследован: 1 FLARE = 1,5 ₽, Steam +5% сверху; перед коммерческим запуском подтвердить условия и лимиты.
+Регионы/номиналы Apple — предварительные варианты интерфейса, без выдуманной рублёвой цены или кода. Название и курс утверждены пользователем: 1 ₽ = 1,8 Drops, Steam +5% сверху; перед коммерческим запуском подтвердить условия и лимиты.
 
 ## Документы и источники
 
@@ -36,7 +36,7 @@ Oswald + GolosText: SIL OFL, лицензии public/fonts/Oswald-OFL.txt и pub
 
 Public URL: https://vv-organization.github.io/flare-skins/
 
-Pushes to `codex/flare-storefront` run `.github/workflows/pages.yml`: Node 24, lockfile installation, lint, tests, isolated static export and Pages deployment. Use Actions → Deploy FLARE to GitHub Pages → Run workflow for a manual redeploy.
+Pushes to `codex/flare-storefront` run `.github/workflows/pages.yml`: Node 24, lockfile installation, lint, tests, isolated static export and Pages deployment. Use Actions → Deploy Drops to GitHub Pages → Run workflow for a manual redeploy.
 
 Local equivalent: `npm ci && npm run lint && npm test && npm run build:pages`.
 The export goes to ignored `out-pages/`; its base path is `/flare-skins`.

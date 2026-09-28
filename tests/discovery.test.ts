@@ -5,9 +5,9 @@ import {filterDiscovery, curatedColors} from "../src/lib/discovery.ts";
 import type {Product} from "../src/lib/types.ts";
 
 const products = [
-  {id:"baron-2543db74-1727-4fe4-b923-decbc9dd9d1e", name:"Desert Eagle | Механо-пушка", priceMinor:28472},
-  {id:"baron-9329f0e9-76fc-4ae9-947e-d4b6d9e405c4", name:"FAMAS | Авария", priceMinor:167481},
-  {id:"swap-35d1bd8ccb42", name:"M9 Bayonet | Tiger Tooth", priceMinor:346371},
+  {id:"baron-2543db74-1727-4fe4-b923-decbc9dd9d1e", name:"Desert Eagle | Механо-пушка", priceMinor:76874},
+  {id:"baron-9329f0e9-76fc-4ae9-947e-d4b6d9e405c4", name:"FAMAS | Авария", priceMinor:452200},
+  {id:"swap-35d1bd8ccb42", name:"M9 Bayonet | Tiger Tooth", priceMinor:935203},
   {id:"swap-0a7a560b8522", name:"P250 | Undertow", priceMinor:339112},
   {id:"baron-1a5f3d48-c150-4cf6-ad3a-9e5916c737c3", name:"USP-S | Printstream", priceMinor:167414},
   {id:"unmarked", name:"Other", priceMinor:100},
@@ -23,7 +23,7 @@ test("curated color groups use explicit catalog IDs", () => {
   for(const ids of Object.values(curatedColors)) for(const id of ids) assert.ok(catalogIds.has(id),`Missing catalog item: ${id}`);
 });
 
-test("RUB budget uses the existing FLARE conversion on minor units", () => {
+test("RUB budget uses the existing Drops conversion on minor units", () => {
   const result=filterDiscovery(products,"orange","3 000");
   assert.deepEqual(result.items.map(p=>p.id),[products[0].id,products[1].id]);
   assert.equal(result.count,2);

@@ -4,7 +4,7 @@ import {FlareSelect} from "./flare-select";
 import {WaveImage as Image} from "./wave-image";
 import Link from "next/link";
 import type {Product} from "@/lib/types";
-import {flareToRub,formatMinor} from "@/lib/money";
+import {dropsToRub,formatMinor} from "@/lib/money";
 import {Price} from "./price";
 import {useShop} from "./shop-provider";
 
@@ -19,7 +19,7 @@ export function SkinCompare({products}:{products:Product[]}){
  if(!left||!right)return null;
  const pair=[left,right];
  const difference=Math.abs(left.priceMinor-right.priceMinor);
- const rubDifference=Math.abs(flareToRub(left.priceMinor)-flareToRub(right.priceMinor));
+ const rubDifference=Math.abs(dropsToRub(left.priceMinor)-dropsToRub(right.priceMinor));
  const cheaper=left.priceMinor<right.priceMinor?left:right;
  function select(index:number,id:string){
   const other=pair[1-index];
@@ -36,6 +36,6 @@ export function SkinCompare({products}:{products:Product[]}){
    <div className="compare-row" role="row"><span role="rowheader">StatTrak™</span>{pair.map(p=><span role="cell" key={p.id}>{p.stattrak?"Есть":"Нет"}</span>)}</div>
    <div className="compare-row compare-actions" role="row"><span role="rowheader">Подробнее</span>{pair.map(p=><div role="cell" key={p.id}><Link href={`/catalog/${p.id}`}>Открыть скин <span aria-hidden="true">↗</span></Link></div>)}</div>
   </div>
-  <div className="compare-verdict" role="status" aria-atomic="true">{difference>0?<><span>{cheaper.finish} дешевле на</span><strong>{formatMinor(difference)} FLARE <small>≈ {formatMinor(rubDifference)} ₽</small></strong></>:<strong>Оба предмета стоят одинаково</strong>}<span className="compare-note">Float описывает износ, но сам по себе не определяет стоимость скина.</span></div>
+  <div className="compare-verdict" role="status" aria-atomic="true">{difference>0?<><span>{cheaper.finish} дешевле на</span><strong>{formatMinor(difference)} Drops <small>≈ {formatMinor(rubDifference)} ₽</small></strong></>:<strong>Оба предмета стоят одинаково</strong>}<span className="compare-note">Float описывает износ, но сам по себе не определяет стоимость скина.</span></div>
  </section>;
 }

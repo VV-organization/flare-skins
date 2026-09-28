@@ -1,4 +1,4 @@
-name: Deploy FLARE to GitHub Pages
+name: Deploy Drops to GitHub Pages
 on:
   push:
     branches: [codex/flare-storefront]

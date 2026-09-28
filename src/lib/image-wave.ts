@@ -35,7 +35,7 @@ void main(){
  vec4 color=texture2D(picture,clamp(samplePoint,0.,1.))*inside;
  float reveal=1.-smoothstep(-10.,4.,distance(point,vec2(.5))*25.-pow(time*3.,2.));
  float alpha=color.a*reveal;
- // Premultiplied transparency keeps FLARE's existing gradient behind the object.
+ // Premultiplied transparency keeps Drops's existing gradient behind the object.
  gl_FragColor=vec4((color.rgb+height*.08)*alpha,alpha);
 }
 `;

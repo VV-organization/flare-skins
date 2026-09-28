@@ -1,1 +1,1 @@
-export default function Loading(){return <div className="page-container catalog-loading" role="status"><div className="loading-heading"><span>FLARE</span><strong>Загружаем страницу</strong><i/></div></div>}
+export default function Loading(){return <div className="page-container catalog-loading" role="status"><div className="loading-heading"><span>Drops</span><strong>Загружаем страницу</strong><i/></div></div>}
