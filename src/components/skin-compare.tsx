@@ -1,5 +1,6 @@
 "use client";
 import {useState} from "react";
+import {FlareSelect} from "./flare-select";
 import {WaveImage as Image} from "./wave-image";
 import Link from "next/link";
 import type {Product} from "@/lib/types";
@@ -26,9 +27,9 @@ export function SkinCompare({products}:{products:Product[]}){
   setIds(index===0?[id,alternate]:[alternate,id]);
  }
  return <section className="skin-compare" id="compare" aria-labelledby="compare-title">
-  <header><div><span className="eyebrow">ДВА ВАРИАНТА РЯДОМ</span><h2 id="compare-title">СРАВНИТЬ СКИНЫ</h2><p>Выберите оружие и два покрытия. Сопоставьте цену, состояние и float.</p></div><label className="compare-weapon">Оружие<select aria-label="Оружие" value={weapon} onChange={event=>{setWeapon(event.target.value);setIds(["",""]);}}>{weapons.map(item=><option key={item}>{item}</option>)}</select></label></header>
+  <header><div><span className="eyebrow">ДВА ВАРИАНТА РЯДОМ</span><h2 id="compare-title">СРАВНИТЬ СКИНЫ</h2><p>Выберите оружие и два покрытия. Сопоставьте цену, состояние и float.</p></div><div className="compare-weapon"><span>Оружие</span><FlareSelect label="Оружие" value={weapon} onChange={value=>{setWeapon(value);setIds(["",""]);}} options={weapons.map(item=>({value:item,label:item}))}/></div></header>
   <div className="compare-table" role="table" aria-label="Сравнение выбранных скинов">
-   <div className="compare-row compare-selection" role="row"><span role="columnheader">Предмет</span>{pair.map((p,i)=><div role="columnheader" key={i}><label className="sr-only" htmlFor={`compare-${i}`}>{i===0?"Первый скин":"Второй скин"}</label><select id={`compare-${i}`} value={p.id} onChange={event=>select(i,event.target.value)}>{pool.map(item=><option key={item.id} value={item.id}>{item.finish} · {item.condition}{item.stattrak?" · StatTrak":""}</option>)}</select><button className="compare-image" aria-label={`Рассмотреть для сравнения: ${p.name}`} onClick={()=>shop.setPreviewProduct(p)}><Image key={p.id} src={p.imageUrl} alt={p.name} width={600} height={350}/><span>↗</span></button><h3>{p.finish}</h3></div>)}</div>
+   <div className="compare-row compare-selection" role="row"><span role="columnheader">Предмет</span>{pair.map((p,i)=><div role="columnheader" key={i}><FlareSelect label={i===0?"Первый скин":"Второй скин"} value={p.id} onChange={value=>select(i,value)} options={pool.map(item=>({value:item.id,label:item.finish,description:`${item.condition}${item.stattrak?" · StatTrak™":""}`}))}/><button className="compare-image" aria-label={`Рассмотреть для сравнения: ${p.name}`} onClick={()=>shop.setPreviewProduct(p)}><Image key={p.id} src={p.imageUrl} alt={p.name} width={600} height={350}/><span>↗</span></button><h3>{p.finish}</h3></div>)}</div>
    <div className="compare-row" role="row"><span role="rowheader">Цена</span>{pair.map(p=><div role="cell" key={p.id}><Price minor={p.priceMinor}/></div>)}</div>
    <div className="compare-row" role="row"><span role="rowheader">Состояние</span>{pair.map(p=><span role="cell" key={p.id}>{p.condition}</span>)}</div>
    <div className="compare-row" role="row"><span role="rowheader">Float</span>{pair.map(p=><span role="cell" key={p.id}>{p.float===null?"Не указан":p.float.toFixed(6)}</span>)}</div>
