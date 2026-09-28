@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import {useEffect,useRef,useState} from "react";
 
 export function WeaponViewer(){
@@ -10,9 +11,12 @@ export function WeaponViewer(){
  const [metal,setMetal]=useState(false);
  const [state,setState]=useState<"loading"|"ready"|"error">("loading");
  useEffect(()=>{
-  let disposed=false;let cleanup=()=>{};
+  let disposed=false;let cleanup=()=>{};const abort=new AbortController();
   async function start(){
-   const [T,{OBJLoader},{OrbitControls},{RoomEnvironment}]=await Promise.all([import("three"),import("three/examples/jsm/loaders/OBJLoader.js"),import("three/examples/jsm/controls/OrbitControls.js"),import("three/examples/jsm/environments/RoomEnvironment.js")]);
+   const modelRequest=fetch(`${process.env.NEXT_PUBLIC_BASE_PATH??""}/models/ak47-packed.bin.gz`,{signal:abort.signal}).then(async response=>{if(!response.ok||!response.body)throw Error("Model unavailable");return new Response(response.body.pipeThrough(new DecompressionStream("gzip"))).arrayBuffer();});
+   // Attach rejection immediately, including when WebGL initialization fails first.
+   void modelRequest.catch(()=>{});
+   const [T,{OrbitControls},{RoomEnvironment}]=await Promise.all([import("three"),import("three/examples/jsm/controls/OrbitControls.js"),import("three/examples/jsm/environments/RoomEnvironment.js")]);
    if(disposed||!host.current)return;
    const container=host.current;
    const renderer=new T.WebGLRenderer({antialias:true,alpha:true,powerPreference:"high-performance"});
@@ -37,16 +41,17 @@ export function WeaponViewer(){
    const render=(time:number)=>{frame=requestAnimationFrame(render);const delta=Math.min((time-previousTime)/1000,.05);previousTime=time;if(visible&&!document.hidden){camera.zoom=T.MathUtils.damp(camera.zoom,targetZoom,reduced.matches?100:8,delta);camera.updateProjectionMatrix();controls.update(delta);renderer.render(scene,camera);}};frame=requestAnimationFrame(render);
    cleanup=()=>{cancelAnimationFrame(frame);resize.disconnect();observer.disconnect();controls.removeEventListener("start",pause);reduced.removeEventListener("change",onMotion);controls.dispose();environment.dispose();object?.traverse(node=>{if(node instanceof T.Mesh){node.geometry.dispose();(Array.isArray(node.material)?node.material:[node.material]).forEach(m=>m.dispose());}});renderer.dispose();renderer.domElement.remove();};
    try{
-    object=await new OBJLoader().loadAsync(`${process.env.NEXT_PUBLIC_BASE_PATH??""}/models/ak47.obj`);if(disposed){object.traverse(node=>{if(node instanceof T.Mesh)node.geometry.dispose();});return;}
-    object.traverse(node=>{if(!(node instanceof T.Mesh))return;const geometry=node.geometry;const position=geometry.attributes.position;const colors=new Float32Array(position.count*3);const dark=new T.Color("#242629"),ceramic=new T.Color("#e7e4da"),orange=new T.Color("#ff5b26");
-     // A bespoke FLARE finish, not a reproduction of a catalog skin.
-     for(let i=0;i<position.count;i++){const y=position.getY(i),z=position.getZ(i);const smooth=(a:number,b:number,v:number)=>T.MathUtils.smoothstep(v,a,b);const body=(1-smooth(7.5,9,z))*smooth(-1,.4,y);const stock=1-smooth(-4,-3,z);const foregrip=smooth(8.5,9.5,z)*(1-smooth(16,17,z))*smooth(-.2,.6,y);const end=1-smooth(-9.2,-8.7,z);const color=dark.clone().lerp(ceramic,Math.max(body,stock)).lerp(orange,Math.max(foregrip,end));color.toArray(colors,i*3);}
-     geometry.setAttribute("color",new T.BufferAttribute(colors,3));node.material=new T.MeshStandardMaterial({vertexColors:true,metalness:.3,roughness:.48});
-    });
-    const bounds=new T.Box3().setFromObject(object);object.position.sub(bounds.getCenter(new T.Vector3()));const pivot=new T.Group();pivot.add(object);pivot.rotation.y=-Math.PI/2;const scale=5.8/bounds.getSize(new T.Vector3()).z;pivot.scale.setScalar(scale);scene.add(pivot);reset();setState("ready");
+    const buffer=await modelRequest;if(disposed)return;
+    const view=new DataView(buffer),count=view.getUint32(0,true),indices=view.getUint32(4,true);let offset=8;
+    const geometry=new T.BufferGeometry();geometry.setAttribute("position",new T.BufferAttribute(new Float32Array(buffer,offset,count*3),3));offset+=count*12;
+    geometry.setAttribute("normal",new T.BufferAttribute(new Int8Array(buffer,offset,count*3),3,true));offset+=count*3;
+    geometry.setAttribute("color",new T.BufferAttribute(new Uint8Array(buffer,offset,count*3),3,true));offset+=count*3;
+    geometry.setIndex(new T.BufferAttribute(new Uint16Array(buffer,offset,indices),1));
+    object=new T.Group();object.add(new T.Mesh(geometry,new T.MeshStandardMaterial({vertexColors:true,metalness:.3,roughness:.48})));
+    const bounds=new T.Box3().setFromObject(object);object.position.sub(bounds.getCenter(new T.Vector3()));const pivot=new T.Group();pivot.add(object);pivot.rotation.y=-Math.PI/2;const scale=5.8/bounds.getSize(new T.Vector3()).z;pivot.scale.setScalar(scale);scene.add(pivot);reset();renderer.render(scene,camera);setState("ready");
    }catch{if(!disposed)setState("error");}
   }
-  start().catch(()=>{if(!disposed)setState("error");});return()=>{disposed=true;cleanup();};
+  start().catch(()=>{if(!disposed)setState("error");});return()=>{disposed=true;abort.abort();cleanup();};
  },[]);
- return <div className="weapon-viewer"><div ref={host} className="weapon-canvas"/>{state==="loading"&&<div className="studio-loading" role="status"><span/>Загружаем 3D-модель</div>}{state==="error"&&<div className="weapon-error" role="status">Не удалось открыть 3D-просмотр.<Link href="/catalog">Перейти к скинам ↗</Link></div>}<span className="viewer-label">AK-47 / FLARE FINISH</span>{state==="ready"&&<><div className="viewer-modes"><button aria-pressed={rotating} onClick={()=>actions.current.auto(!rotating)}>{rotating?"Ⅱ Пауза":"↻ Автоповорот"}</button><button aria-pressed={detail} onClick={()=>actions.current.detail(!detail)}>{detail?"− Целиком":"+ Детали"}</button><button aria-pressed={metal} onClick={()=>actions.current.metal(!metal)}>{metal?"Материал: металл":"Материал: керамика"}</button></div><div className="viewer-controls"><span>Зажмите и вращайте · 360°</span><div><button onClick={()=>actions.current.turn(-1)} aria-label="Повернуть влево">←</button><button onClick={()=>actions.current.turn(1)} aria-label="Повернуть вправо">→</button><button onClick={()=>actions.current.reset()}>Исходный вид ↺</button></div></div></>}</div>;
+ return <div className={`weapon-viewer weapon-state-${state}`}><Image className="weapon-poster" aria-hidden={state==="ready"} src={`${process.env.NEXT_PUBLIC_BASE_PATH??""}/hero/ak47-poster.webp`} alt="AK-47 в авторском покрытии FLARE" width={1160} height={460} preload/><div ref={host} className="weapon-canvas"/>{state==="loading"&&<span className="viewer-preparing" role="status">Подключаем вращение</span>}{state==="error"&&<div className="weapon-error" role="status">Не удалось открыть 3D-просмотр.<Link href="/catalog">Перейти к скинам ↗</Link></div>}<span className="viewer-label">AK-47 / FLARE FINISH</span>{state==="ready"&&<><div className="viewer-modes"><button aria-pressed={rotating} onClick={()=>actions.current.auto(!rotating)}>{rotating?"Ⅱ Пауза":"↻ Автоповорот"}</button><button aria-pressed={detail} onClick={()=>actions.current.detail(!detail)}>{detail?"− Целиком":"+ Детали"}</button><button aria-pressed={metal} onClick={()=>actions.current.metal(!metal)}>{metal?"Материал: металл":"Материал: керамика"}</button></div><div className="viewer-controls"><span>Зажмите и вращайте · 360°</span><div><button onClick={()=>actions.current.turn(-1)} aria-label="Повернуть влево">←</button><button onClick={()=>actions.current.turn(1)} aria-label="Повернуть вправо">→</button><button onClick={()=>actions.current.reset()}>Исходный вид ↺</button></div></div></>}</div>;
 }

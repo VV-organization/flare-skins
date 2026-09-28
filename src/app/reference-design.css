@@ -409,3 +409,9 @@
 .viewer-modes button[aria-pressed=true]{background:#f4eee8;color:#211c19}
 .viewer-controls{z-index:2;pointer-events:none}.viewer-controls button{pointer-events:auto}
 @media(max-width:700px){.viewer-modes{left:10px;right:10px;top:33px;gap:4px}.viewer-modes button{font-size:10px;padding:7px 8px;min-height:36px}.viewer-controls>span{max-width:105px}}
+/* First paint contains the same weapon; WebGL replaces it only after its first frame. */
+.weapon-poster{position:absolute;left:10%;top:50%;width:80%;height:auto;transform:translateY(-50%);pointer-events:none;object-fit:contain;transition:opacity .18s ease}
+.weapon-state-ready .weapon-poster{opacity:0}
+.weapon-state-loading .weapon-canvas,.weapon-state-error .weapon-canvas{visibility:hidden}
+.viewer-preparing{position:absolute;bottom:22px;left:22px;color:#392014;font-size:11px}
+@media(prefers-reduced-motion:reduce){.weapon-poster{transition:none}}
