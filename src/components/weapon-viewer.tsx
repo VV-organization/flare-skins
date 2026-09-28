@@ -6,7 +6,7 @@ import {useEffect,useRef,useState} from "react";
 export function WeaponViewer(){
  const host=useRef<HTMLDivElement>(null);
  const actions=useRef<{reset:()=>void;turn:(direction:number)=>void;auto:(value:boolean)=>void;detail:(value:boolean)=>void;metal:(value:boolean)=>void}>({reset:()=>{},turn:()=>{},auto:()=>{},detail:()=>{},metal:()=>{}});
- const [rotating,setRotating]=useState(false);
+ const [rotating,setRotating]=useState(true);
  const [detail,setDetail]=useState(false);
  const [metal,setMetal]=useState(false);
  const [state,setState]=useState<"loading"|"ready"|"error">("loading");
@@ -29,7 +29,7 @@ export function WeaponViewer(){
    const controls=new OrbitControls(camera,renderer.domElement);renderer.domElement.style.touchAction="none";controls.enableDamping=true;controls.dampingFactor=.09;controls.enablePan=false;controls.enableZoom=false;controls.rotateSpeed=.65;controls.minPolarAngle=.25;controls.maxPolarAngle=Math.PI-.25;
    let object:InstanceType<typeof T.Group>|undefined;let frame=0;let visible=true;let targetZoom=1;let previousTime=0;
    const reduced=window.matchMedia("(prefers-reduced-motion: reduce)");
-   controls.autoRotate=!reduced.matches;controls.autoRotateSpeed=.65;setRotating(controls.autoRotate);
+   controls.autoRotate=true;controls.autoRotateSpeed=1;setRotating(true);
    const pause=()=>{controls.autoRotate=false;setRotating(false);};controls.addEventListener("start",pause);
    const onMotion=()=>{if(reduced.matches)pause();};reduced.addEventListener("change",onMotion);
    function reset(){targetZoom=1;setDetail(false);const aspect=container.clientWidth/Math.max(container.clientHeight,1);camera.position.set(0,.3,Math.max(8.4,13/aspect));controls.target.set(0,0,0);controls.update();}
