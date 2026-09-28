@@ -155,3 +155,28 @@
  .home-topups .topup-grid{grid-template-rows:repeat(5,auto)}
  .home-topups .topup-grid>.topup-panel{grid-row:span 5}
 }
+
+/* Expandable FAQ: continuous rows, with an inset reading column when open. */
+.faq-disclosures{border-top:1px solid var(--ui-border)}
+.faq-disclosure{border-bottom:1px solid var(--line);position:relative;transition:background-color .2s}
+.faq-disclosure summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:32px;padding:24px;cursor:pointer;min-height:96px}
+.faq-disclosure summary::-webkit-details-marker{display:none}
+.faq-disclosure summary::marker{content:""}
+.faq-disclosure summary h3{font:400 clamp(20px,2vw,28px)/1.35 var(--font-body);letter-spacing:-.025em;margin:0;max-width:48ch;text-wrap:pretty}
+.faq-toggle{display:grid;place-items:center;width:48px;height:48px;flex-shrink:0;color:var(--accent-text);border:1px solid var(--ui-border);transition:background-color .2s,color .2s}
+.faq-toggle svg{transition:rotate .25s}
+.faq-disclosure[open]{background:linear-gradient(105deg,#ff5b261c,transparent 75%),#242222;box-shadow:inset 3px 0 #ff5b26}
+.faq-disclosure[open] .faq-toggle{background:#ff5b26;color:#1b1b1b;border-color:#ff5b26}
+.faq-disclosure[open] .faq-toggle svg{rotate:90deg}
+.faq-disclosure summary:hover .faq-toggle{background:#ff5b26;color:#1b1b1b;border-color:#ff5b26}
+.faq-answer{padding:0 104px 32px max(24px,20%)}
+.faq-answer p{max-width:64ch;margin:0;color:var(--muted);font-size:16px;line-height:1.65}
+.faq-disclosure[open] .faq-answer{animation:faq-answer-in .24s ease-out}
+@keyframes faq-answer-in{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:700px){
+ .faq-disclosure summary{padding:20px 16px;gap:16px;min-height:88px}
+ .faq-disclosure summary h3{font-size:20px}
+ .faq-toggle{width:44px;height:44px}
+ .faq-answer{padding:0 24px 24px 16px}
+}
+@media(prefers-reduced-motion:reduce){.faq-disclosure[open] .faq-answer{animation:none}.faq-toggle,.faq-toggle svg{transition:none}}

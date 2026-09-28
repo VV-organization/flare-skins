@@ -1,4 +1,5 @@
 import type {Catalog} from "@/lib/types";
+import {Icon} from "./icon";
 import {Converter} from "./converter";
 import {LoadoutBuilder} from "./loadout-builder";
 import {Topups} from "./topups";
@@ -22,6 +23,6 @@ export function Home({catalog}:{catalog:Catalog}){
   <SkinCompare products={catalog.products}/>
   <CategoryAtlas catalog={catalog}/><ColorPicker products={catalog.products}/><GiftCards/>
   <div className="bottom-converter"><Converter/></div>
-  <section className="flare-faq" id="faq"><div><h2>FAQ</h2></div><div className="faq-answers">{faqs.map(([q,a])=><article key={q}><h3>{q}</h3><p>{a}</p></article>)}</div></section>
+  <section className="flare-faq" id="faq"><div><h2>FAQ</h2></div><div className="faq-disclosures">{faqs.map(([q,a])=><details className="faq-disclosure" name="flare-faq" key={q}><summary><h3>{q}</h3><span className="faq-toggle" aria-hidden="true"><Icon name="diagonal" size={24}/></span></summary><div className="faq-answer"><p>{a}</p></div></details>)}</div></section>
  </div>;
 }
