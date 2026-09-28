@@ -3,7 +3,7 @@ import {useEffect} from 'react';
 import {usePathname} from 'next/navigation';
 import {createImageWave,WAVE_DURATION,WAVE_HANDOFF,WAVE_SPEED} from '@/lib/image-wave';
 
-const selector='.hero-object>img[data-wave-ready],.product-image-button>img[data-wave-ready],.loadout-image>img[data-wave-ready],.compare-image>img[data-wave-ready],.detail-visual>img[data-wave-ready],.inspection-object>img[data-wave-ready],.category-object>img[data-wave-ready]';
+const selector='img[data-wave-ready]';
 
 /** Progressive enhancement: the original accessible image always survives any failure. */
 export function ImageMotion(){
@@ -23,6 +23,7 @@ export function ImageMotion(){
    seen.set(image,source);
    if(rect.bottom<0)return;
    image.classList.add('image-wave-pending');
+   image.dataset.waveState='pending';
    let effect:ReturnType<typeof createImageWave>=null;
    let frame=0,finished=false,started=false,last=0,elapsed=0;
    let resize:ResizeObserver|undefined;
@@ -33,6 +34,7 @@ export function ImageMotion(){
     observer.unobserve(image);resize?.disconnect();
     image.removeEventListener('load',start);image.removeEventListener('error',finish);
     image.classList.remove('image-wave-pending');host.classList.remove('image-wave-active');
+    image.dataset.waveState=effect?'complete':'fallback';
     if(effect){effect.dispose();contexts--;}
     records.delete(image);
    };
@@ -53,12 +55,16 @@ export function ImageMotion(){
     if(!image.complete){timeout??=setTimeout(finish,10000);return;}
     if(!image.naturalWidth){finish();return;}
     clearTimeout(timeout);
-    if(contexts>=4||host!.closest('.motion-paused')){finish();return;}
+    if(host!.closest('.motion-paused')){finish();return;}
+    // Do not silently skip the remaining cards when several rows enter together.
+    // Leave room for the hero's persistent 3D context; retry overflow on the next frame.
+    if(contexts>=12){frame=requestAnimationFrame(start);return;}
     started=true;
     host!.classList.add('image-wave-active');
     effect=createImageWave(image);
     if(!effect){finish();return;}
     contexts++;
+    image.dataset.waveState='running';
     host!.append(effect.canvas);effect.draw(0);
     effect.canvas.addEventListener('webglcontextlost',finish,{once:true});
     resize=new ResizeObserver(()=>{effect?.resize();});resize.observe(image);

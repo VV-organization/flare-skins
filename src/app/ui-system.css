@@ -147,3 +147,15 @@ input[type=radio],input[type=checkbox]{width:18px;height:18px;flex-shrink:0}
 .viewer-label,.viewer-preparing{color:#171717}
 .catalog-category-tabs>button>span{font-size:12px}
 .account-topup>.eyebrow{color:var(--accent-text)}
+
+/* Every skin tile shares the same zoom, including the temporary water canvas.
+   Independent scale avoids fighting the refraction renderer's transform. */
+:is(.product-image-button,.loadout-image,.loadout-alternative,.compare-image,.category-object)>:is(img,.image-wave-canvas){scale:1;transition:scale .4s cubic-bezier(.2,.7,.2,1)!important;transform-origin:center}
+.loadout-alternative:hover img,.product-card:hover .product-image-button>img,.catalog-page .catalog-results .product-card:hover .product-image-button>img{transform:none}
+@media(hover:hover) and (pointer:fine){
+ :is(.product-card,.loadout-image,.loadout-alternative,.compare-image,.category-stage):hover :is(img,.image-wave-canvas){scale:1.07}
+}
+:is(.product-card,.loadout-image,.loadout-alternative,.compare-image):focus-within :is(img,.image-wave-canvas){scale:1.07}
+@media(prefers-reduced-motion:reduce){
+ :is(.product-card,.loadout-image,.loadout-alternative,.compare-image,.category-stage) :is(img,.image-wave-canvas){scale:1!important;transition:none!important}
+}
