@@ -16,6 +16,7 @@ import "./card-surfaces.css";
 import "./image-motion.css";
 import "./hero-compact.css";
 import "./reference-design.css";
+import "./ui-system.css";
 import {ImageMotion} from "@/components/image-motion";
 import {PageMotion} from "@/components/page-motion";
 const golos=localFont({src:"../../public/fonts/GolosText-Variable.ttf",variable:"--font-body",display:"swap",weight:"400 900"});

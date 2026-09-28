@@ -1,0 +1,149 @@
+/* FLARE UI audit: shared rhythm and interaction rules, after reference layouts. */
+:root{
+ --space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-6:24px;--space-8:32px;--space-10:40px;--space-12:48px;
+ --page-gutter:max(40px, calc((100vw - 1600px)/2));--section-space:80px;--control-size:48px;--target-size:44px;
+ --type-body:16px;--type-label:14px;--type-caption:12px;
+ --accent-text:#ffab89;--radius:0;--ui-border:#82766e;
+}
+body{font-size:var(--type-body)}
+.site-header,.page-container,.flare-hero,.flare-footer{padding-inline:var(--page-gutter)}
+.home-topups,.loadout-builder,.skin-compare,.category-index,.color-picker,.gift-section,.bottom-converter,.flare-faq{padding:var(--section-space) var(--page-gutter)}
+.section{padding-block:var(--section-space)}
+.section-heading,.topup-section>.section-heading,.category-index>header,.skin-compare>header,.flare-faq>div:first-child{margin-bottom:var(--space-8)}
+.home-experience :is(.eyebrow+h2,.eyebrow+h3){margin-top:var(--space-4)}
+.home-experience :is(.loadout-aside,.discovery-aside)>p{margin-top:var(--space-6);max-width:60ch}
+.home-experience p,.product-description,.account-panel>p,.delivery-note p{line-height:1.6;text-wrap:pretty}
+p.product-description{max-width:65ch}
+/* Heading levels: page/section 48/36; component 32/28; card 28/24. */
+#main .full-detail .detail-content h1{font:500 var(--section-heading-size)/1.1 var(--font-display);letter-spacing:-.025em;text-align:left;text-transform:uppercase;overflow-wrap:anywhere}
+.account-panel .panel-heading h2,.account-topup>h2,.order-summary h2,.empty-basket h2,.error-page h1{font:500 32px/1.15 var(--font-display);letter-spacing:-.025em;text-align:left}
+.product-card h3,.catalog-results .product-card h3,.chapter-products .product-card h3,.discovery-grid .product-card h3,.cart-item-name h2{font:500 28px/1.15 var(--font-display);letter-spacing:-.025em;overflow-wrap:anywhere}
+.faq-answers h3{font-size:24px;line-height:1.3;letter-spacing:-.02em}
+.eyebrow,#main .eyebrow,.account-page .eyebrow,.modal .eyebrow{font-size:var(--type-caption);line-height:1.5;letter-spacing:.08em}
+.product-meta,.catalog-results .product-meta,.weapon-name,.product-info>.weapon-name,.product-card .weapon-name,.cart-item-name .weapon-name,.fine-print,.cart-item-name .fine-print,.account-sidebar>.fine-print,.account-sidebar .steam-id,.float-labels,.detail-image-note,.inspection-top,.inspection-bottom,.inspection-zoom,.account-section-label,.account-section-label>span:last-child,.footer-baseline,.hero-overline,.viewer-label,.viewer-caption{font-size:var(--type-caption);line-height:1.5}
+.topup-grid .topup-panel>p,.topup-heading-note,.loadout-aside p,.discovery-aside p,.gift-form>p,.faq-answers p,.account-panel>p.muted,.account-guest>p,.delivery-note p,.history-empty p,.cart-item-name p,.account-balance p,.market-intro-copy>p{font-size:var(--type-body);line-height:1.6}
+.field-label,.payment-choice label,.checkout-method label,.gift-region-options legend,.gift-region-options button>strong,.filter-option,.filter-option.stattrak-filter,.catalog-filters legend,.color-option strong,.budget-options button,.loadout-row-top,.loadout-info>span,.loadout-info>small,.loadout-alternative>span,.payment-row,.gift-steps li,.compare-note{font-size:var(--type-label);line-height:1.5}
+.price,.order-total,.topup-total,.money-input,.float-block{font-variant-numeric:tabular-nums}
+.price b,.price small,.catalog-results .price b,.catalog-results .price small,.discovery-grid .price small,.loadout-info .price small{font-size:var(--type-caption);line-height:1.5}
+.product-bottom .price>span,.catalog-results .price>span,.discovery-grid .price>span,.loadout-info .price>span{font-size:20px;line-height:1.3}
+.product-card .product-info{padding:var(--space-4) 0 0}
+.product-card .weapon-name{display:block;margin-bottom:var(--space-2);color:var(--muted)}
+.product-card h3{margin-bottom:var(--space-4)}
+.product-card .product-bottom{margin-top:auto;padding-top:var(--space-4);gap:var(--space-3);align-items:center}
+.product-grid>.product-card{display:flex;flex-direction:column;min-width:0}
+.product-grid>.product-card>.product-info{flex:1;display:flex;flex-direction:column}
+/* Related controls are close; unrelated groups use 24/32px, sections use 80px. */
+.topup-grid{gap:var(--space-8)}
+.topup-grid>.topup-panel,.topup-grid>.topup-panel.steam-panel{padding-inline:var(--space-6)}
+.topup-grid .topup-panel>p{margin-bottom:var(--space-6)}
+.amount-presets,.payment-choice,.checkout-method{gap:var(--space-2)}
+.gift-region-options{gap:var(--space-2);margin-block:var(--space-6)}
+.gift-form>label,.field-label{margin-bottom:var(--space-2)}
+.gift-steps{gap:var(--space-6)}
+.gift-form h3{font-size:32px;line-height:1.2;letter-spacing:-.025em}
+.loadout-row{gap:var(--space-4);padding-bottom:var(--space-8);margin-bottom:var(--space-8)}
+.loadout-controls{gap:var(--space-2)}
+.loadout-info{gap:var(--space-1) var(--space-4)}
+.compare-row{gap:var(--space-4);padding-block:var(--space-6)}
+.compare-selection{padding-top:0}
+.compare-selection h3{font-size:32px;line-height:1.15}
+.faq-answers{gap:var(--space-8)}
+.faq-answers article,.faq-answers article:first-child{padding-top:var(--space-6)}
+.faq-answers h3{margin:var(--space-4) 0 var(--space-3)}
+/* Interactive chrome: 44px minimum targets, fields 48px, clear keyboard focus. */
+button,.button,.icon-button,select,input,summary{border-radius:0}
+button,.button,.icon-button,summary{min-height:var(--target-size)}
+.icon-button,.add-button,.catalog-results .add-button,.discovery-grid .add-button,.loadout-controls button{min-width:var(--target-size);width:var(--target-size);height:var(--target-size);flex-shrink:0}
+.button,.compact,.header-login{font-size:var(--type-label);line-height:1.4;gap:var(--space-3)}
+.button{min-height:var(--control-size);padding:var(--space-3) var(--space-6)}
+button:active:not(:disabled),a.button:active{translate:0 1px}
+:focus-visible{outline:2px solid #fff0e8;outline-offset:4px;box-shadow:0 0 0 6px #1b1b1b}
+input:not([type=radio]):not([type=checkbox]):not([type=range]),select,.text-input{min-height:var(--control-size);font-size:16px}
+.money-input input{min-height:48px}
+input[type=range]{min-height:44px;cursor:pointer}
+input[type=radio],input[type=checkbox]{width:18px;height:18px;flex-shrink:0}
+.filter-option,.payment-choice label,.checkout-method label{min-height:44px;display:flex;align-items:center;gap:var(--space-3)}
+.filter-option{margin:0;padding-block:var(--space-2)}
+.filter-option small{font-size:12px}
+.catalog-view-controls button,.catalog-chapter>header button,.filter-chips button,.budget-options button,.amount-presets button{font-size:14px;min-height:44px}
+.catalog-view-controls [role=group]{gap:var(--space-6)}
+.catalog-chapter>header{gap:var(--space-4);padding:var(--space-4) 0 var(--space-6)}
+.catalog-filters fieldset{margin-bottom:var(--space-6);padding-bottom:var(--space-6)}
+.catalog-filters legend{margin-bottom:var(--space-3)}
+.text-link,.main-nav>a,.cart-link,.hero-rifle-link,.breadcrumbs>a,.footer-directory nav a,.compare-actions a{min-height:44px;display:inline-flex;align-items:center}
+.text-link{font-size:14px;white-space:normal;line-height:1.5}
+.main-nav>a{font-size:14px}
+.gift-form summary{display:flex;align-items:center;padding-block:var(--space-3);font-size:14px;cursor:pointer}
+.gift-form summary::before{content:"+";margin-right:12px;font-size:20px}
+.gift-form details[open] summary::before{content:"−"}
+.viewer-modes{gap:8px;top:48px;left:16px;right:16px}
+.viewer-modes button,.viewer-controls button{min-height:44px;font-size:12px;padding:8px 12px}
+.viewer-controls>div{gap:8px}.viewer-controls{font-size:12px;gap:8px;left:16px;right:16px;bottom:16px}
+.viewer-controls button[aria-label]{min-width:44px}
+/* Palette: neutral graphite, warm readable text, orange reserved for emphasis. */
+.muted,.fine-print,.product-meta,.weapon-name,.float-labels,.inspection-top,.inspection-bottom,.account-section-label,.footer-baseline{color:var(--muted)}
+.pink,.detail-content>.pink,.category-line.is-active>button{color:var(--accent-text)}
+.gift-region-options button[aria-pressed=true],.primary{color:#171717}
+.form-message{font-size:14px;line-height:1.6;padding:16px;border-left:3px solid var(--accent-text);background:#302722;color:var(--text);margin-top:16px}
+.account-sidebar nav{gap:8px;margin-top:24px}
+.account-sidebar nav>a,.account-sidebar nav>button{font-size:14px;gap:8px;padding:12px 16px}
+.account-sidebar{padding-top:24px;margin-bottom:0}
+.account-main{padding-top:0}.account-section-label{padding:24px 0 16px;margin-top:0}
+.account-panel,.account-balance,.order-summary{padding:32px}
+.account-panel .panel-heading{margin-bottom:16px;gap:16px;flex-wrap:wrap}
+.account-panel .panel-index{margin-bottom:16px}
+.account-panel .trade-form{margin-top:24px}.trade-input-row{gap:12px}
+.account-balance .price-large{margin-block:16px}
+.breadcrumbs{gap:12px;font-size:12px;flex-wrap:wrap;padding-block:24px}
+.full-detail .detail-content{padding-left:32px}
+.detail-content>.muted{font-size:16px}
+.detail-content .product-description{font-size:16px;line-height:1.65}
+.skin-specs{gap:24px;padding-block:24px;margin-top:24px}
+.skin-specs span,.skin-specs strong{font-size:14px}
+.inspection-tools{gap:16px;flex-wrap:wrap;padding:16px 24px}
+.inspection-surfaces{gap:8px}.inspection-surfaces>button{width:44px;height:44px;min-width:44px}
+.inspection-zoom{gap:8px;flex-wrap:wrap;font-size:14px}.inspection-zoom input{min-width:72px}
+.modal .detail-content{padding:32px}.modal-close{z-index:5;background:#242322}
+.modal:not(.modal-wide) h2{font:500 32px/1.15 var(--font-display);letter-spacing:-.025em}
+@media(max-width:1000px){.account-topup{gap:32px}.full-detail .detail-content{padding-left:24px}}
+@media(max-width:700px){
+ :root{--page-gutter:20px;--section-space:56px}
+ .product-card h3,.catalog-results .product-card h3,.chapter-products .product-card h3,.discovery-grid .product-card h3,.cart-item-name h2{font-size:24px}
+ .account-panel .panel-heading h2,.account-topup>h2,.order-summary h2,.empty-basket h2{font-size:28px}
+ .product-bottom .price>span,.catalog-results .price>span,.discovery-grid .price>span,.loadout-info .price>span{font-size:18px}
+ .product-grid,.catalog-results .product-grid,.chapter-products{gap:24px 16px}
+ .product-card .product-bottom{flex-wrap:wrap;gap:12px}.product-bottom .add-button{margin-left:auto}
+ .catalog-view-controls [role=group]{gap:16px;flex-wrap:wrap}
+ .catalog-chapter>header{flex-wrap:wrap}.catalog-chapter>header button{margin-left:auto}
+ .compare-selection h3{font-size:24px}.compare-row{gap:12px}
+ .compare-row>[role=cell],.compare-row>[role=rowheader]{font-size:14px}
+ .gift-form{padding-top:32px}.gift-steps{gap:16px}
+ .account-panel,.account-balance,.order-summary{padding:24px}
+ .account-sidebar nav{gap:8px}.account-sidebar nav>a,.account-sidebar nav>button{font-size:12px;padding:12px 8px}
+ .account-section-label>span:last-child{display:none}
+ .account-topup>form{padding-top:24px}
+ .cart-item{grid-template-columns:88px minmax(0,1fr) 44px;gap:12px 16px;padding-block:24px}
+ .cart-image{width:88px}.cart-item .remove-button{min-width:44px;min-height:44px}.cart-item-name p{font-size:14px}
+ .delivery-note{padding:24px}.delivery-note .text-link{font-size:14px}
+ .full-detail .detail-content{padding:32px 0 0}
+ .inspection-tools{padding:16px;gap:8px}.inspection-bottom{gap:12px;line-height:1.5}
+ .modal .detail-content{padding:24px}.quick-detail .detail-content h2{font-size:32px}
+ .viewer-modes{top:40px;left:12px;right:12px;gap:8px}.viewer-modes button{font-size:12px;padding:8px}
+ .viewer-controls{left:12px;right:12px;bottom:12px;flex-wrap:wrap}.viewer-controls>span{max-width:none;width:100%;font-size:12px}
+ .viewer-controls>div{width:100%}.viewer-controls button:last-child{flex:1}
+ .viewer-label,.viewer-caption{font-size:12px}.viewer-caption{max-width:145px}
+ .hero-overline>span:last-child{display:none}
+ .footer-directory{gap:24px}.footer-baseline{gap:16px;flex-wrap:wrap}
+}
+#main .price b,#main .price small,#main .product-meta abbr,.category-number,.category-line small,.category-stage-caption,.converter-rate>span{font-size:12px;line-height:1.5}
+#main .text-link{font-size:14px}
+.money-input input:not([type=radio]):not([type=checkbox]):not([type=range]){font-size:28px}
+.topup-grid .money-input,.topup-grid .text-input,.gift-form>select,.text-input,.price-range input,.search-input,.sort-control{border-bottom:1px solid var(--ui-border)}
+.breadcrumbs{display:flex;align-items:center}
+@media(max-width:700px){.breadcrumbs>span:last-child{flex-basis:100%;margin-top:-4px}.site-header .button{padding-inline:12px}.site-header .header-actions{gap:8px}}
+
+/* One content guide on wide screens; full-bleed surfaces keep their background. */
+.page-container{max-width:none}
+.viewer-label,.viewer-preparing{color:#171717}
+.catalog-category-tabs>button>span{font-size:12px}
+.account-topup>.eyebrow{color:var(--accent-text)}
