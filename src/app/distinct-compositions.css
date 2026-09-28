@@ -120,3 +120,20 @@
 @keyframes select-open{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
 @media(max-width:700px){.flare-select-trigger{padding:12px;gap:8px}.flare-select-trigger strong{font-size:14px}.compare-selection .flare-select-trigger{min-height:104px;align-items:flex-start}.flare-select-trigger>svg{margin-top:2px}}
 @media(prefers-reduced-motion:reduce){.flare-select-menu{animation:none}}
+
+/* Keep the complete footer composition within a viewport. */
+.flare-footer{min-height:100svh;display:flex;flex-direction:column;gap:24px;padding-block:32px 24px}
+.flare-footer .footer-directory{padding:0;gap:24px;grid-template-rows:1fr}
+.flare-footer .footer-directory>p{grid-row:1;align-self:end}
+.flare-footer .footer-directory>nav{grid-row:1}
+.flare-footer .footer-directory nav>a{font-size:clamp(20px,2vw,28px);line-height:1.3;padding:12px 0;min-height:48px}
+.flare-footer .footer-signature{padding:0;margin-top:auto;overflow:visible}
+.flare-footer .footer-signature>span{font-size:min(26vw,32svh,380px);line-height:1;letter-spacing:-.055em}
+.flare-footer .footer-signature>svg{width:min(15vw,20svh);height:min(15vw,20svh)}
+.flare-footer .footer-baseline{margin:0;padding-top:16px;gap:16px}
+@media(max-width:600px){
+ .flare-footer{gap:24px;padding-block:24px 20px}
+ .flare-footer .footer-directory>p{margin-bottom:16px}
+ .flare-footer .footer-directory nav>a{font-size:20px;min-height:48px}
+ .flare-footer .footer-signature>span{font-size:min(28vw,24svh)}
+}
