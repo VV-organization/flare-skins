@@ -8,7 +8,7 @@ const labels:Record<string,string>={knife:'Ножи',rifle:'Винтовки',pi
 /** Noho's adjacent object panels, each leading directly to its own category. */
 export function CategoryAtlas({catalog}:{catalog:Catalog}){
  return <section className="category-index" aria-labelledby="atlas-title">
-  <header><span className="eyebrow">РАЗДЕЛЫ КАТАЛОГА</span><h2 id="atlas-title">КАТЕГОРИИ</h2></header>
+  <header><h2 id="atlas-title">КАТЕГОРИИ</h2></header>
   <div className="category-exhibit">{catalog.categories.map(category=>{
    const items=catalog.products.filter(p=>p.categoryId===category.id);const item=items[0];
    return <Link className="category-tile" href={`/catalog?category=${category.id}`} key={category.id} aria-label={`${labels[category.id]}, предметов: ${items.length}`}>

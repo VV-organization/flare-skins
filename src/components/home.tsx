@@ -22,6 +22,6 @@ export function Home({catalog}:{catalog:Catalog}){
   <SkinCompare products={catalog.products}/>
   <CategoryAtlas catalog={catalog}/><ColorPicker products={catalog.products}/><GiftCards/>
   <div className="bottom-converter"><Converter/></div>
-  <section className="flare-faq" id="faq"><div><h2>FAQ</h2></div><div className="faq-answers">{faqs.map(([q,a],i)=><article key={q}><span className="eyebrow">0{i+1}</span><h3>{q}</h3><p>{a}</p></article>)}</div></section>
+  <section className="flare-faq" id="faq"><div><h2>FAQ</h2></div><div className="faq-answers">{faqs.map(([q,a])=><article key={q}><h3>{q}</h3><p>{a}</p></article>)}</div></section>
  </div>;
 }

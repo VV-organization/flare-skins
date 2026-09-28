@@ -16,7 +16,7 @@ export function LoadoutBuilder({products}:{products:Product[]}){
  const allAdded=selected.length>0&&selected.every(p=>shop.cart.some(item=>item.id===p.id));
  const change=(slot:number,direction:number)=>setIndices(values=>values.map((value,i)=>i===slot?(value+direction+pools[i].length)%pools[i].length:value));
  return <section className="loadout-builder" id="collection" aria-labelledby="loadout-title">
-  <aside className="loadout-aside"><span className="eyebrow">КОНСТРУКТОР / CS2</span><h2 id="loadout-title">СОБРАТЬ<br/>КОМПЛЕКТ</h2><p>Пистолет, винтовка и нож. Листайте предметы в каждой строке — стоимость комплекта пересчитается сразу.</p><span className="loadout-count">03 <small>позиции<br/>на ваш выбор</small></span><Link href="/catalog" className="text-link">Открыть каталог <Icon name="arrow"/></Link></aside>
+  <aside className="loadout-aside"><h2 id="loadout-title">СОБРАТЬ<br/>КОМПЛЕКТ</h2><p>Пистолет, винтовка и нож. Листайте предметы в каждой строке — стоимость комплекта пересчитается сразу.</p><span className="loadout-count">03 <small>позиции<br/>на ваш выбор</small></span><Link href="/catalog" className="text-link">Открыть каталог <Icon name="arrow"/></Link></aside>
   <div className="loadout-workbench">{slots.map((slot,i)=>{
    const product=pools[i][indices[i]%pools[i].length];
    return <article className="loadout-row" key={slot.id}>

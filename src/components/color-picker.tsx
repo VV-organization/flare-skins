@@ -19,7 +19,6 @@ export function ColorPicker({products}:{products:Product[]}) {
   const {count,items,invalidBudget}=filterDiscovery(products,color,budget);
   return <section className={`color-picker section palette-${color}`} id="color-picker" aria-labelledby="color-picker-title">
     <div className="discovery-aside">
-      <span className="eyebrow">ПОДБОР ПО ПАЛИТРЕ</span>
       <h2 id="color-picker-title">ЦВЕТ + БЮДЖЕТ</h2>
       <p>Укажите цвет и предел цены в рублях. В подборке останутся предметы, соответствующие обоим условиям.</p>
       <fieldset className="color-options"><legend>Цвет</legend>{colors.map(option=><button key={option.id} type="button" className={`color-option color-${option.id}${color===option.id?" active":""}`} aria-pressed={color===option.id} onClick={()=>setColor(option.id)}><span className="color-swatch" aria-hidden="true"/><strong>{option.label}</strong><small>{option.note}</small></button>)}</fieldset>

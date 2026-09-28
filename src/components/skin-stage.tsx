@@ -4,7 +4,6 @@ import {Icon} from "./icon";
 import {WeaponViewer} from "./weapon-viewer";
 export function SkinStage(){
  return <section className="flare-hero hero-studio hero-three">
- <div className="hero-overline"><span>МАГАЗИН ЦИФРОВЫХ ТОВАРОВ</span><span>COUNTER-STRIKE 2 / STEAM / APPLE</span></div>
  <div className="hero-title"><h1><span>СКИНЫ</span><span><em>И СЕРВИСЫ</em></span></h1></div>
  <div className="hero-side-copy"><p>Поворачивайте AK-47.<br/>Рассмотрите AK-47 со всех сторон.</p><Link href="/catalog?category=rifle" className="hero-rifle-link">Выбрать винтовку <Icon name="diagonal" size={20}/></Link></div>
  <div className="hero-visual"><WeaponViewer/></div>

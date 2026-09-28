@@ -137,3 +137,21 @@
  .flare-footer .footer-directory nav>a{font-size:20px;min-height:48px}
  .flare-footer .footer-signature>span{font-size:min(28vw,24svh)}
 }
+
+/* One heading per section; a single spacing scale owns section boundaries. */
+.home-experience>:is(.home-topups,.loadout-builder,.skin-compare,.category-index,.color-picker,.gift-section,.bottom-converter,.flare-faq){margin-block:0;padding-block:var(--section-space)}
+.home-topups>.topup-section{padding-block:0;margin-block:0}
+.home-experience :is(.section-heading,.category-index>header,.skin-compare>header,.flare-faq>div:first-child){margin-top:0;margin-bottom:32px}
+#main .home-experience :is(.section-heading h2,.loadout-aside h2,.skin-compare>header h2,.category-index>header h2,.discovery-aside h2,.gift-art h2,.converter h2,.flare-faq h2){margin-top:0}
+.home-topups .topup-title h3{margin:0;color:inherit}
+.home-experience :is(.loadout-aside,.discovery-aside)>p,.skin-compare>header p{margin-top:24px}
+.flare-hero{grid-template-rows:0 auto minmax(0,1fr) auto auto}
+@media(max-width:700px){
+ .flare-hero{grid-template-rows:0 auto auto minmax(180px,1fr) auto auto}
+ .home-experience :is(.section-heading,.category-index>header,.skin-compare>header,.flare-faq>div:first-child){margin-bottom:24px}
+ .loadout-aside h2{grid-row:1}.loadout-aside p{grid-row:2}
+}
+@media(min-width:801px){
+ .home-topups .topup-grid{grid-template-rows:repeat(5,auto)}
+ .home-topups .topup-grid>.topup-panel{grid-row:span 5}
+}
